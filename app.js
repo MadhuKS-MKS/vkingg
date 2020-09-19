@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
+const fileupload = require("express-fileupload");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 const hpp = require("hpp");
@@ -30,6 +31,9 @@ app.use(express.json());
 
 // Cookie parser
 app.use(cookieParser());
+
+// File uploading
+app.use(fileupload());
 
 // Sanitize data
 app.use(mongoSanitize());
