@@ -25,6 +25,8 @@ const app = express();
 //Route files
 const category = require("./routes/category");
 const products = require("./routes/products");
+const user = require("./routes/users");
+const auth = require("./routes/auth");
 
 //bodyparser
 app.use(express.json());
@@ -58,6 +60,8 @@ if (process.env.NODE_ENV === "development") {
 // Mount routers
 app.use("/api/category", category);
 app.use("/api/products", products);
+app.use("/api/users", user);
+app.use("/api/auth", auth);
 
 const PORT = process.env.PORT || 5000;
 
