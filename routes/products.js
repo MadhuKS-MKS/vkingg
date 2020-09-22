@@ -9,7 +9,10 @@ const {
   updateProduct,
   productPhotoUpload
 } = require("../controller/product");
-
+const {
+  protect,
+  authorize
+} = require("../middleware/auth");
 const advancedResults = require("../middleware/advancedResults");
 
 
@@ -21,13 +24,13 @@ router
     path: "category",
     select: "catname",
   }), getProducts) //get all products
-  .post(addProduct);
+  .post(protect, authorize("vendor", "admin"), addProduct);
 
 router
   .route("/:ProductId")
   .get(getProduct)
-  .put(updateProduct)
-  .delete(deleteProduct);
+  .put(protect, authorize("vendor", "admin"), updateProduct)
+  .delete(protect, authorize("vendor", "admin"), deleteProduct);
 
 
 module.exports = router;
